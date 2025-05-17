@@ -4,6 +4,8 @@
 
 This repository contains a MCP server that provides access to [Milvus](https://milvus.io/) vector database functionality.
 
+**Note:** This repository is a fork of https://github.com/zilliztech/mcp-server-milvus.git with various improvements and added support for `uvx` execution, making it easier to run without installation.
+
 ![MCP with Milvus](Claude_mcp+1080.gif)
 
 ## Prerequisites
@@ -21,23 +23,28 @@ The recommended way to use this MCP server is to run it directly with `uv` witho
 If you want to clone the repository:
 
 ```bash
-git clone https://github.com/zilliztech/mcp-server-milvus.git
+git clone https://github.com/danchev/mcp-server-milvus.git
 cd mcp-server-milvus
 ```
 
 Then you can run the server directly:
 
 ```bash
-uv run src/mcp_server_milvus/server.py --milvus-uri http://localhost:19530
+uv run mcp-server-milvus --milvus-uri http://localhost:19530
 ```
-
-Alternatively you can change the .env file in the `src/mcp_server_milvus/` directory to set the environment variables and run the server with the following command:
+Alternatively, you can set environment variables using a `.env` file in your project directory and then run the server using the following `uv` command:
 
 ```bash
-uv run src/mcp_server_milvus/server.py
-```
+# Create a .env file with your Milvus configuration
+cat > .env <<EOF
+MILVUS_URI=http://localhost:19530
+MILVUS_TOKEN=your_token_if_needed
+MILVUS_DB=default
+EOF
 
-### Important: the .env file will have higher priority than the command line arguments.
+# Run the server (it will automatically read from .env)
+uv run mcp-server-milvus
+```
 
 ## Supported Applications
 
@@ -60,12 +67,9 @@ This MCP server can be used with various LLM applications that support the Model
 {
   "mcpServers": {
     "milvus": {
-      "command": "/PATH/TO/uv",
+      "command": "uvx",
       "args": [
-        "--directory",
-        "/path/to/mcp-server-milvus/src/mcp_server_milvus",
-        "run",
-        "server.py",
+        "mcp-server-milvus@latest",
         "--milvus-uri",
         "http://localhost:19530"
       ]
@@ -88,7 +92,7 @@ This MCP server can be used with various LLM applications that support the Model
 
    - **Type**: Select `stdio` (since you're running a command)
    - **Name**: `milvus`
-   - **Command**: `/PATH/TO/uv --directory /path/to/mcp-server-milvus/src/mcp_server_milvus run server.py --milvus-uri http://127.0.0.1:19530`
+   - **Command**: `uvx mcp-server-milvus@latest --milvus-uri http://127.0.0.1:19530`
 
    > ⚠️ Note: Use `127.0.0.1` instead of `localhost` to avoid potential DNS resolution issues.
 
@@ -108,15 +112,12 @@ Create a `.cursor/mcp.json` file in your project root:
    {
      "mcpServers": {
        "milvus": {
-         "command": "/PATH/TO/uv",
-         "args": [
-           "--directory",
-           "/path/to/mcp-server-milvus/src/mcp_server_milvus",
-           "run",
-           "server.py",
-           "--milvus-uri",
-           "http://127.0.0.1:19530"
-         ]
+          "command": "uvx",
+          "args": [
+            "mcp-server-milvus@latest",
+            "--milvus-uri",
+            "http://127.0.0.1:19530"
+          ]
        }
      }
    }
@@ -213,10 +214,10 @@ The server provides the following tools:
 
 ## Development
 
-To run the server directly:
+To run the server using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
 
 ```bash
-uv run server.py --milvus-uri http://localhost:19530
+uv run mcp dev src/mcp_server_milvus/server.py
 ```
 
 ## Examples

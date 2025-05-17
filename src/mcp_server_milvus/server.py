@@ -1,9 +1,8 @@
 import argparse
-import os
 import json
+import os
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator, Optional
-from dotenv import load_dotenv
 
 from mcp.server.fastmcp import Context, FastMCP
 from pymilvus import DataType, MilvusClient
@@ -16,6 +15,25 @@ class MilvusConnector:
         self.uri = uri
         self.token = token
         self.client = MilvusClient(uri=uri, token=token, db_name=db_name)
+
+    @classmethod
+    def from_env(cls) -> "MilvusConnector":
+        """
+        Create a MilvusConnector instance from environment variables.
+
+        Environment variables:
+        - MILVUS_URI: Milvus server URI (required)
+        - MILVUS_TOKEN: Authentication token (optional)
+        - MILVUS_DB: Database name (defaults to "default")
+        """
+        uri = os.environ.get("MILVUS_URI")
+        if not uri:
+            raise ValueError("MILVUS_URI environment variable must be set")
+
+        token = os.environ.get("MILVUS_TOKEN")
+        db_name = os.environ.get("MILVUS_DB", "default")
+
+        return cls(uri=uri, token=token, db_name=db_name)
 
     async def list_collections(self) -> list[str]:
         """List all collections in the database."""
@@ -90,7 +108,7 @@ class MilvusConnector:
         limit: int = 5,
         output_fields: Optional[list[str]] = None,
         metric_type: str = "COSINE",
-        filter_expr: Optional[str] = None, 
+        filter_expr: Optional[str] = None,
     ) -> list[dict]:
         """
         Perform vector similarity search on a collection.
@@ -128,7 +146,7 @@ class MilvusConnector:
         limit: int = 5,
         output_fields: Optional[list[str]] = None,
         metric_type: str = "COSINE",
-        filter_expr: Optional[str] = None, 
+        filter_expr: Optional[str] = None,
     ) -> list[dict]:
         """
         Perform hybrid search combining vector similarity and attribute filtering.
@@ -143,7 +161,7 @@ class MilvusConnector:
             metric_type: Distance metric (COSINE, L2, IP)
             filter_expr: Optional filter expression
         """
-        raise NotImplementedError('This method is not yet supported.') 
+        raise NotImplementedError("This method is not yet supported.")
 
     async def create_collection(
         self,
@@ -243,7 +261,7 @@ class MilvusConnector:
         limit: int = 5,
         output_fields: Optional[list[str]] = None,
         metric_type: str = "COSINE",
-        filter_expr: Optional[str] = None, 
+        filter_expr: Optional[str] = None,
         search_params: Optional[dict[str, Any]] = None,
     ) -> list[list[dict]]:
         """
@@ -270,7 +288,7 @@ class MilvusConnector:
                 search_params=search_params,
                 limit=limit,
                 output_fields=output_fields,
-                filter=filter_expr
+                filter=filter_expr,
             )
             return results
         except Exception as e:
@@ -432,7 +450,7 @@ class MilvusConnector:
             return self.client.get_load_state(collection_name)
         except Exception as e:
             raise ValueError(f"Failed to get loading progress: {str(e)}")
-        
+
     async def list_databases(self) -> list[str]:
         """List all databases in the Milvus instance."""
         try:
@@ -442,17 +460,13 @@ class MilvusConnector:
 
     async def use_database(self, db_name: str) -> bool:
         """Switch to a different database.
-        
+
         Args:
             db_name: Name of the database to use
         """
         try:
             # Create a new client with the specified database
-            self.client = MilvusClient(
-                uri=self.uri, 
-                token=self.token, 
-                db_name=db_name
-            )
+            self.client = MilvusClient(uri=self.uri, token=self.token, db_name=db_name)
             return True
         except Exception as e:
             raise ValueError(f"Failed to switch database: {str(e)}")
@@ -466,15 +480,8 @@ class MilvusContext:
 @asynccontextmanager
 async def server_lifespan(server: FastMCP) -> AsyncIterator[MilvusContext]:
     """Manage application lifecycle for Milvus connector."""
-    config = server.config
-
-    connector = MilvusConnector(
-        uri=config.get("milvus_uri", "http://localhost:19530"),
-        token=config.get("milvus_token"),
-        db_name=config.get("db_name", "default"),
-    )
-
     try:
+        connector = MilvusConnector.from_env()
         yield MilvusContext(connector)
     finally:
         pass
@@ -707,20 +714,21 @@ async def milvus_list_databases(ctx: Context = None) -> str:
 async def milvus_use_database(db_name: str, ctx: Context = None) -> str:
     """
     Switch to a different database.
-    
+
     Args:
         db_name: Name of the database to use
     """
     connector = ctx.request_context.lifespan_context.connector
     success = await connector.use_database(db_name)
-    
+
     return f"Switched to database '{db_name}' successfully"
+
 
 @mcp.tool()
 async def milvus_get_collection_info(collection_name: str, ctx: Context = None) -> str:
     """
     Lists detailed information about a specific collection
-    
+
     Args:
         collection_name: Name of collection to load
     """
@@ -729,24 +737,38 @@ async def milvus_get_collection_info(collection_name: str, ctx: Context = None) 
     info_str = json.dumps(collection_info, indent=2)
     return f"Collection information:\n{info_str}"
 
+
 def parse_arguments():
+    """Parse command line arguments with environment variable fallbacks.
+
+    Returns:
+        argparse.Namespace: The parsed command line arguments
+    """
     parser = argparse.ArgumentParser(description="Milvus MCP Server")
-    parser.add_argument("--milvus-uri", type=str,
-                        default="http://localhost:19530", help="Milvus server URI")
-    parser.add_argument("--milvus-token", type=str,
-                        default=None, help="Milvus authentication token")
-    parser.add_argument("--milvus-db", type=str,
-                        default="default", help="Milvus database name")
+    parser.add_argument("--milvus-uri", type=str, default=os.environ.get("MILVUS_URI", "http://localhost:19530"), help="Milvus server URI")
+    parser.add_argument("--milvus-token", type=str, default=os.environ.get("MILVUS_TOKEN"), help="Milvus authentication token")
+    parser.add_argument("--milvus-db", type=str, default=os.environ.get("MILVUS_DB", "default"), help="Milvus database name")
     return parser.parse_args()
 
 
-if __name__ == "__main__":
-    load_dotenv()
+def setup_environment(args):
+    """Set environment variables based on parsed arguments.
+    Args:
+        args (argparse.Namespace): The parsed command line arguments
+    """
+    os.environ["MILVUS_URI"] = args.milvus_uri
+    if args.milvus_token:
+        os.environ["MILVUS_TOKEN"] = args.milvus_token
+    os.environ["MILVUS_DB"] = args.milvus_db
+
+
+def main():
+    """Main entry point for the Milvus MCP Server."""
     args = parse_arguments()
-    mcp.config = {
-        "milvus_uri": os.environ.get("MILVUS_URI", args.milvus_uri),
-        "milvus_token": os.environ.get("MILVUS_TOKEN", args.milvus_token),
-        "db_name": os.environ.get("MILVUS_DB", args.milvus_db),
-    }
+    setup_environment(args)
 
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
