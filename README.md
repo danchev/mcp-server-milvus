@@ -42,8 +42,8 @@ MILVUS_TOKEN=your_token_if_needed
 MILVUS_DB=default
 EOF
 
-# Run the server (it will automatically read from .env)
-uv run mcp-server-milvus
+# Run the server with the .env file
+uv run --env-file .env mcp-server-milvus
 ```
 
 ## Supported Applications
