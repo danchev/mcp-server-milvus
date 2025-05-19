@@ -214,10 +214,12 @@ The server provides the following tools:
 
 ## Development
 
-To run the server using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
+### Testing During Development
+
+To test the server locally using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
 
 ```bash
-uv run mcp dev src/mcp_server_milvus/server.py
+npx @modelcontextprotocol/inspector uvx mcp-server-milvus@latest
 ```
 
 ## Examples
