@@ -1,14 +1,14 @@
 import argparse
+import json
 import os
 from contextlib import asynccontextmanager
-from typing import Any, AsyncIterator, Optional, List
-from dotenv import load_dotenv
-import json
-from fastmcp import FastMCP, Context
+from typing import Any, AsyncIterator, Optional
+
+from mcp.server.fastmcp import Context, FastMCP
 from pymilvus import (
-    MilvusClient,
-    DataType,
     AnnSearchRequest,
+    DataType,
+    MilvusClient,
     RRFRanker,
 )
 
@@ -18,6 +18,25 @@ class MilvusConnector:
         self.uri = uri
         self.token = token
         self.client = MilvusClient(uri=uri, token=token, db_name=db_name)
+
+    @classmethod
+    def from_env(cls) -> "MilvusConnector":
+        """
+        Create a MilvusConnector instance from environment variables.
+
+        Environment variables:
+        - MILVUS_URI: Milvus server URI (required)
+        - MILVUS_TOKEN: Authentication token (optional)
+        - MILVUS_DB: Database name (defaults to "default")
+        """
+        uri = os.environ.get("MILVUS_URI")
+        if not uri:
+            raise ValueError("MILVUS_URI environment variable must be set")
+
+        token = os.environ.get("MILVUS_TOKEN")
+        db_name = os.environ.get("MILVUS_DB", "default")
+
+        return cls(uri=uri, token=token, db_name=db_name)
 
     async def list_collections(self) -> list[str]:
         """List all collections in the database."""
@@ -127,7 +146,7 @@ class MilvusConnector:
         collection_name: str,
         query_text: str,
         text_field: str,
-        vector: List[float],
+        vector: list[float],
         vector_field: str,
         limit: int,
         output_fields: Optional[list[str]] = None,
@@ -479,15 +498,8 @@ class MilvusContext:
 @asynccontextmanager
 async def server_lifespan(server: FastMCP) -> AsyncIterator[MilvusContext]:
     """Manage application lifecycle for Milvus connector."""
-    config = server.config
-
-    connector = MilvusConnector(
-        uri=config.get("milvus_uri", "http://localhost:19530"),
-        token=config.get("milvus_token"),
-        db_name=config.get("db_name", "default"),
-    )
-
     try:
+        connector = MilvusConnector.from_env()
         yield MilvusContext(connector)
     finally:
         pass
@@ -786,31 +798,38 @@ async def milvus_get_collection_info(collection_name: str, ctx: Context = None) 
     info_str = json.dumps(collection_info, indent=2)
     return f"Collection information:\n{info_str}"
 
-
 def parse_arguments():
+    """Parse command line arguments with environment variable fallbacks.
+
+    Returns:
+        argparse.Namespace: The parsed command line arguments
+    """
     parser = argparse.ArgumentParser(description="Milvus MCP Server")
-    parser.add_argument(
-        "--milvus-uri", type=str, default="http://localhost:19530", help="Milvus server URI"
-    )
-    parser.add_argument(
-        "--milvus-token", type=str, default=None, help="Milvus authentication token"
-    )
-    parser.add_argument("--milvus-db", type=str, default="default", help="Milvus database name")
+    parser.add_argument("--milvus-uri", type=str, default=os.environ.get("MILVUS_URI", "http://localhost:19530"), help="Milvus server URI")
+    parser.add_argument("--milvus-token", type=str, default=os.environ.get("MILVUS_TOKEN"), help="Milvus authentication token")
+    parser.add_argument("--milvus-db", type=str, default=os.environ.get("MILVUS_DB", "default"), help="Milvus database name")
     parser.add_argument("--sse", action="store_true", help="Enable SSE mode")
-    parser.add_argument("--port", type=int, default=8000, help="Port number for SSE server")
     return parser.parse_args()
 
 
+def setup_environment(args):
+    """Set environment variables based on parsed arguments.
+    Args:
+        args (argparse.Namespace): The parsed command line arguments
+    """
+    os.environ["MILVUS_URI"] = args.milvus_uri
+    if args.milvus_token:
+        os.environ["MILVUS_TOKEN"] = args.milvus_token
+    os.environ["MILVUS_DB"] = args.milvus_db
+
+
 def main():
-    load_dotenv()
+    """Main entry point for the Milvus MCP Server."""
     args = parse_arguments()
-    mcp.config = {
-        "milvus_uri": os.environ.get("MILVUS_URI", args.milvus_uri),
-        "milvus_token": os.environ.get("MILVUS_TOKEN", args.milvus_token),
-        "db_name": os.environ.get("MILVUS_DB", args.milvus_db),
-    }
+    setup_environment(args)
+
     if args.sse:
-        mcp.run(transport="sse", port=args.port, host="0.0.0.0")
+        mcp.run(transport="sse")
     else:
         mcp.run()
 
