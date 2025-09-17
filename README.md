@@ -20,35 +20,31 @@ Before using this MCP server, ensure you have:
 - Python 3.10 or higher
 - A running [Milvus](https://milvus.io/) instance (local or remote)
 - [uv](https://github.com/astral-sh/uv) installed (recommended for running the server)
+- [npx](https://nodejs.org/en/download/) installed (for testing with MCP Inspector)
 
 ## Usage
 
-The recommended way to use this MCP server is to run it directly with `uv` without installation. This is how both Claude Desktop and Cursor are configured to use it in the examples below.
+The recommended way to use this MCP server is to run it directly with `uvx` without installation. This is how both Claude Desktop and Cursor are configured to use it in the examples below.
 
-If you want to clone the repository:
+### Running the Server
 
-```bash
-git clone https://github.com/danchev/mcp-server-milvus.git
-cd mcp-server-milvus
-```
-
-Then you can run the server directly:
+You can run the MCP server for Milvus using the following command, replacing `http://localhost:19530` with your Milvus server URI:
 
 ```bash
-uv run mcp-server-milvus --milvus-uri http://localhost:19530
+uvx mcp-server-milvus --milvus-uri http://localhost:19530
 ```
-Alternatively, you can set environment variables using a `.env` file in your project directory and then run the server using the following `uv` command:
+Alternatively, you can set environment variables using a `.env` file in your project directory and then run the server using the following `uvx` command:
 
 ```bash
 # Create a .env file with your Milvus configuration
 cat > .env <<EOF
 MILVUS_URI=http://localhost:19530
-MILVUS_TOKEN=your_token_if_needed
+MILVUS_TOKEN=root:Milvus
 MILVUS_DB=default
 EOF
 
 # Run the server with the .env file
-uv run --env-file .env mcp-server-milvus
+uvx --env-file .env mcp-server-milvus
 ```
 
 ### Running Modes
@@ -62,7 +58,7 @@ The server supports two running modes: **stdio** (default) and **SSE** (Server-S
 - Usage:
 
   ```bash
-  uv run mcp-server-milvus --milvus-uri http://localhost:19530
+  uvx mcp-server-milvus@latest --milvus-uri http://localhost:19530
   ```
 
 ### SSE Mode
@@ -72,7 +68,7 @@ The server supports two running modes: **stdio** (default) and **SSE** (Server-S
 - **Usage:**
 
   ```bash
-  uv run mcp-server-milvus --sse --milvus-uri http://localhost:19530
+  uvx mcp-server-milvus@latest --sse --milvus-uri http://localhost:19530
   ```
 
   - `--sse`: Enables SSE mode.
@@ -82,13 +78,13 @@ The server supports two running modes: **stdio** (default) and **SSE** (Server-S
   If you want to debug in SSE mode, after starting the SSE service, enter the following command:
 
   ```bash
-  uv run mcp dev src/mcp_server_milvus/server.py
+  npx @modelcontextprotocol/inspector --transport sse --server-url http://localhost:8000/sse
   ```
 
   The output will be similar to:
 
   ```plaintext
-  % uv run mcp dev src/mcp_server_milvus/server.py
+  % npx @modelcontextprotocol/inspector --transport sse --server-url http://localhost:8000/sse
   Starting MCP inspector...
   ⚙️ Proxy server listening on port 6277
   🔍 MCP Inspector is up and running at http://127.0.0.1:6274 🚀
@@ -205,10 +201,10 @@ Create a `.cursor/mcp.json` file in your project root:
 1. Start the service by running the following command:
 
    ```bash
-   uv run mcp-server-milvus --sse --milvus-uri http://your_sse_host --port port
+   uv run mcp-server-milvus --sse --milvus-uri http://your_sse_host
    ```
 
-   > **Note**: Replace `http://your_sse_host` with your actual SSE host address and `port` with the specific port number you’re using.
+   > **Note**: Replace `http://your_sse_host` with your actual SSE host address.
 
 2. Once the service is up and running, overwrite the `mcp.json` file with the following content:
 
