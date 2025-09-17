@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-milvus"
-version = "0.1.1.dev6"
+version = "0.1.1.dev7"
 description = "MCP server for Milvus"
 authors = [
     { name = "D. Danchev", email = "12420863+danchev@users.noreply.github.com" },
