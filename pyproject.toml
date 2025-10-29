@@ -62,11 +62,6 @@ target-version = "py310"
 select = ["E", "F", "I", "B", "Q"]
 ignore = ["E203", "E501"]
 
-[tool.ruff.format]
-quote-style = "single"
-indent-style = "space"
-line-ending = "auto"
-
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.1.1"

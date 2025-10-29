@@ -5,12 +5,12 @@ from pydantic_settings import BaseSettings, CliSettingsSource, PydanticBaseSetti
 
 
 class Settings(BaseSettings):
-    milvus_uri: str = Field('http://localhost:19530', description='Milvus server URI')
-    milvus_token: str | None = Field(None, description='Milvus server authentication token')
-    milvus_db: str = Field('default', description='Milvus database name')
-    sse: bool = Field(False, description='Enable Server-Sent Events')
+    milvus_uri: str = Field("http://localhost:19530", description="Milvus server URI")
+    milvus_token: str | None = Field(None, description="Milvus server authentication token")
+    milvus_db: str = Field("default", description="Milvus database name")
+    sse: bool = Field(False, description="Enable Server-Sent Events")
 
-    model_config = SettingsConfigDict(env_file='.env')
+    model_config = SettingsConfigDict(env_file=".env")
 
     @classmethod
     def settings_customise_sources(
