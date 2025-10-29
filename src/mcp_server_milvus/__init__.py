@@ -1,8 +1,8 @@
-from . import server
+"""Milvus MCP Server."""
 
-def main():
-    """Main entry point for the package."""
-    server.main()
+from importlib.metadata import version
 
-# Optionally expose other important items at package level
-__all__ = ['main', 'server']
+try:
+    __version__ = version("mcp-server-milvus")
+except Exception:  # pragma: no cover
+    __version__ = "0.0.0"
