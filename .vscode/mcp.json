@@ -1,0 +1,38 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "milvusUri",
+      "description": "Milvus server URI",
+      "default": "http://localhost:19530"
+    },
+    {
+      "type": "promptString",
+      "id": "milvusToken",
+      "description": "Milvus server token",
+      "default": ""
+    },
+    {
+      "type": "promptString",
+      "id": "milvusDb",
+      "description": "Milvus database name",
+      "default": "default"
+    }
+  ],
+  "servers": {
+    "milvus": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        ".",
+        "mcp-server-milvus"
+      ],
+      "env": {
+        "MILVUS_URI": "${input:milvusUri}",
+        "MILVUS_TOKEN": "${input:milvusToken}",
+        "MILVUS_DB": "${input:milvusDb}"
+      },
+    }
+  }
+}
