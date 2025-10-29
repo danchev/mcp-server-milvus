@@ -1,0 +1,19 @@
+from _typeshed import Incomplete
+from pymilvus.client.types import DataType as DataType
+from typing import Any
+
+dtype_str_map: Incomplete
+numpy_dtype_str_map: Incomplete
+
+def is_integer_datatype(data_type: DataType): ...
+def is_float_datatype(data_type: DataType): ...
+def is_numeric_datatype(data_type: DataType): ...
+def infer_dtype_by_scalar_data(data: Any): ...
+def infer_dtype_bydata(data: Any): ...
+def map_numpy_dtype_to_datatype(d_type: DataType): ...
+
+CONSISTENCY_STRONG: str
+CONSISTENCY_BOUNDED: str
+CONSISTENCY_SESSION: str
+CONSISTENCY_EVENTUALLY: str
+CONSISTENCY_CUSTOMIZED: str
