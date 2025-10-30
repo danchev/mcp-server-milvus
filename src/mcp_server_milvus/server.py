@@ -1,4 +1,3 @@
-from ast import In
 import json
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator, Optional
@@ -9,8 +8,9 @@ from pymilvus import (
     DataType,
     MilvusClient,
     RRFRanker,
-    utility
+    utility,
 )
+from pymilvus.client.search_result import Hits, SearchResult
 from pymilvus.milvus_client import IndexParams
 
 from .config import Settings, get_settings
@@ -86,7 +86,7 @@ class MilvusConnector:
         filter_expr: str,
         output_fields: Optional[list[str]] = None,
         limit: int = 10,
-    ) -> list[dict]:
+    ) :
         """Query collection using filter expressions."""
         try:
             return self.client.query(
@@ -107,7 +107,7 @@ class MilvusConnector:
         output_fields: Optional[list[str]] = None,
         metric_type: str = "COSINE",
         filter_expr: Optional[str] = None,
-    ):
+    ) :
         """
         Perform vector similarity search on a collection.
 
@@ -681,7 +681,11 @@ async def milvus_create_collection(
         index_params=index_params,
     )
 
-    return f"Collection '{collection_name}' created successfully" if success else f"Failed to create collection '{collection_name}'"
+    return (
+        f"Collection '{collection_name}' created successfully"
+        if success
+        else f"Failed to create collection '{collection_name}'"
+    )
 
 
 @mcp.tool()
@@ -726,7 +730,11 @@ async def milvus_load_collection(ctx: Context, collection_name: str, replica_num
     connector = ctx.request_context.lifespan_context.connector
     success = await connector.load_collection(collection_name=collection_name, replica_number=replica_number)
 
-    return f"Collection '{collection_name}' loaded successfully with {replica_number} replica(s)" if success else f"Failed to load collection '{collection_name}'"
+    return (
+        f"Collection '{collection_name}' loaded successfully with {replica_number} replica(s)"
+        if success
+        else f"Failed to load collection '{collection_name}'"
+    )
 
 
 @mcp.tool()
@@ -740,7 +748,11 @@ async def milvus_release_collection(ctx: Context, collection_name: str) -> str:
     connector = ctx.request_context.lifespan_context.connector
     success = await connector.release_collection(collection_name=collection_name)
 
-    return f"Collection '{collection_name}' released successfully" if success else f"Failed to release collection '{collection_name}'"
+    return (
+        f"Collection '{collection_name}' released successfully"
+        if success
+        else f"Failed to release collection '{collection_name}'"
+    )
 
 
 @mcp.tool()
