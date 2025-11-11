@@ -24,13 +24,18 @@ class MilvusConnector:
         self.client = MilvusClient(uri=uri, token=self.token, db_name=self.db_name)
 
     @classmethod
-    def from_config(cls, settings: Settings) -> "MilvusConnector":
+    def from_config(cls, settings: Settings | None = None) -> "MilvusConnector":
         """
         Create a MilvusConnector instance from a Settings object.
 
         Args:
             settings: An instance of the Settings class containing configuration values.
+
+        Returns:
+            A MilvusConnector instance configured with the provided or default settings.
         """
+        if settings is None:
+            settings = get_settings()
         return cls(uri=settings.milvus_uri, token=settings.milvus_token, db_name=settings.milvus_db)
 
     async def list_collections(self) -> list[str]:
@@ -86,7 +91,7 @@ class MilvusConnector:
         filter_expr: str,
         output_fields: Optional[list[str]] = None,
         limit: int = 10,
-    ) :
+    ):
         """Query collection using filter expressions."""
         try:
             return self.client.query(
@@ -107,7 +112,7 @@ class MilvusConnector:
         output_fields: Optional[list[str]] = None,
         metric_type: str = "COSINE",
         filter_expr: Optional[str] = None,
-    ) :
+    ):
         """
         Perform vector similarity search on a collection.
 
@@ -489,7 +494,7 @@ class MilvusContext:
 async def server_lifespan(server: FastMCP) -> AsyncIterator[MilvusContext]:
     """Manage application lifecycle for Milvus connector."""
     try:
-        connector = MilvusConnector.from_config(get_settings())
+        connector = MilvusConnector.from_config()
         yield MilvusContext(connector)
     finally:
         pass
@@ -506,7 +511,7 @@ async def milvus_text_search(
     limit: int = 5,
     output_fields: Optional[list[str]] = None,
     drop_ratio: float = 0.2,
-) -> str:
+) -> list[str]:
     """
     Search for documents using full text search in a Milvus collection.
 
@@ -526,19 +531,15 @@ async def milvus_text_search(
         drop_ratio=drop_ratio,
     )
 
-    output = f"Search results for '{query_text}' in collection '{collection_name}':\n\n"
-    for result in results:
-        output += f"{result}\n\n"
-
-    return output
+    return [str(result) for result in results]
 
 
 @mcp.tool()
-async def milvus_list_collections(ctx: Context) -> str:
+async def milvus_list_collections(ctx: Context) -> list[str]:
     """List all collections in the database."""
     connector = ctx.request_context.lifespan_context.connector
     collections = await connector.list_collections()
-    return f"Collections in database:\n{', '.join(collections)}"
+    return [str(col) for col in collections]
 
 
 @mcp.tool()
@@ -548,7 +549,7 @@ async def milvus_query(
     filter_expr: str,
     output_fields: Optional[list[str]] = None,
     limit: int = 10,
-) -> str:
+) -> list[str]:
     """
     Query collection using filter expressions.
 
@@ -566,11 +567,7 @@ async def milvus_query(
         limit=limit,
     )
 
-    output = f"Query results for '{filter_expr}' in collection '{collection_name}':\n\n"
-    for result in results:
-        output += f"{result}\n\n"
-
-    return output
+    return [str(result) for result in results]
 
 
 @mcp.tool()
@@ -583,7 +580,7 @@ async def milvus_vector_search(
     output_fields: Optional[list[str]] = None,
     metric_type: str = "COSINE",
     filter_expr: Optional[str] = None,
-) -> str:
+) -> list[str]:
     """
     Perform vector similarity search on a collection.
 
@@ -607,11 +604,7 @@ async def milvus_vector_search(
         filter_expr=filter_expr,
     )
 
-    output = f"Vector search results for '{collection_name}':\n\n"
-    for result in results:
-        output += f"{result}\n\n"
-
-    return output
+    return [str(result) for result in results]
 
 
 @mcp.tool()
@@ -625,7 +618,7 @@ async def milvus_hybrid_search(
     limit: int = 5,
     output_fields: Optional[list[str]] = None,
     filter_expr: Optional[str] = None,
-) -> str:
+) -> list[str]:
     """
     Perform hybrid search combining text and vector search.
 
@@ -652,11 +645,7 @@ async def milvus_hybrid_search(
         filter_expr=filter_expr,
     )
 
-    output = f"Hybrid search results for text '{query_text}' in '{collection_name}':\n\n"
-    for result in results:
-        output += f"{result}\n\n"
-
-    return output
+    return [str(result) for result in results]
 
 
 @mcp.tool()
@@ -756,11 +745,11 @@ async def milvus_release_collection(ctx: Context, collection_name: str) -> str:
 
 
 @mcp.tool()
-async def milvus_list_databases(ctx: Context) -> str:
+async def milvus_list_databases(ctx: Context) -> list[str]:
     """List all databases in the Milvus instance."""
     connector = ctx.request_context.lifespan_context.connector
     databases = await connector.list_databases()
-    return f"Databases in Milvus instance:\n{', '.join(databases)}"
+    return [str(db) for db in databases]
 
 
 @mcp.tool()
@@ -789,6 +778,12 @@ async def milvus_get_collection_info(ctx: Context, collection_name: str) -> str:
     collection_info = await connector.get_collection_info(collection_name)
     info_str = json.dumps(collection_info, indent=2)
     return f"Collection information:\n{info_str}"
+
+
+@mcp.resource("resource://milvus/info")
+async def milvus_info() -> str:
+    """Get basic information about the Milvus MCP Server."""
+    return "Milvus MCP: A server for interacting with Milvus vector database."
 
 
 def main():

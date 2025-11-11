@@ -20,7 +20,7 @@
     }
   ],
   "servers": {
-    "milvus": {
+    "milvus (development)": {
       "command": "uv",
       "args": [
         "run",

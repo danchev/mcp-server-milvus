@@ -1,6 +1,6 @@
 [project]
 name = "mcp-server-milvus"
-version = "0.1.1.dev8"
+version = "0.1.1.dev9"
 description = "MCP server for Milvus"
 authors = [
     { name = "D. Danchev", email = "12420863+danchev@users.noreply.github.com" },
@@ -28,8 +28,8 @@ classifiers = [
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "mcp[cli]>=1.19.0",
-    "pymilvus>=2.6.2",
+    "mcp[cli]>=1.21.0",
+    "pymilvus>=2.6.3",
 ]
 
 [project.urls]
@@ -45,8 +45,8 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.11.10",
-    "ty>=0.0.1a25",
+    "ruff>=0.14.4",
+    "ty>=0.0.1a26",
     {include-group = "commit"},
 ]
 commit = [
