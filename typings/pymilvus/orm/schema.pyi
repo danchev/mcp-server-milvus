@@ -1,17 +1,34 @@
+from typing import Any
+
 import pandas as pd
-from .constants import COMMON_TYPE_PARAMS as COMMON_TYPE_PARAMS
-from .types import DataType as DataType, infer_dtype_by_scalar_data as infer_dtype_by_scalar_data, infer_dtype_bydata as infer_dtype_bydata, map_numpy_dtype_to_datatype as map_numpy_dtype_to_datatype
 from _typeshed import Incomplete
 from pymilvus.client.types import FunctionType as FunctionType
-from pymilvus.exceptions import AutoIDException as AutoIDException, CannotInferSchemaException as CannotInferSchemaException, ClusteringKeyException as ClusteringKeyException, DataNotMatchException as DataNotMatchException, DataTypeNotSupportException as DataTypeNotSupportException, ExceptionsMessage as ExceptionsMessage, FieldTypeException as FieldTypeException, FieldsTypeException as FieldsTypeException, FunctionsTypeException as FunctionsTypeException, ParamError as ParamError, PartitionKeyException as PartitionKeyException, PrimaryKeyException as PrimaryKeyException, SchemaNotReadyException as SchemaNotReadyException
-from typing import Any
+from pymilvus.exceptions import AutoIDException as AutoIDException
+from pymilvus.exceptions import CannotInferSchemaException as CannotInferSchemaException
+from pymilvus.exceptions import ClusteringKeyException as ClusteringKeyException
+from pymilvus.exceptions import DataNotMatchException as DataNotMatchException
+from pymilvus.exceptions import DataTypeNotSupportException as DataTypeNotSupportException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.exceptions import FieldsTypeException as FieldsTypeException
+from pymilvus.exceptions import FieldTypeException as FieldTypeException
+from pymilvus.exceptions import FunctionsTypeException as FunctionsTypeException
+from pymilvus.exceptions import ParamError as ParamError
+from pymilvus.exceptions import PartitionKeyException as PartitionKeyException
+from pymilvus.exceptions import PrimaryKeyException as PrimaryKeyException
+from pymilvus.exceptions import SchemaNotReadyException as SchemaNotReadyException
+
+from .constants import COMMON_TYPE_PARAMS as COMMON_TYPE_PARAMS
+from .types import DataType as DataType
+from .types import infer_dtype_by_scalar_data as infer_dtype_by_scalar_data
+from .types import infer_dtype_bydata as infer_dtype_bydata
+from .types import map_numpy_dtype_to_datatype as map_numpy_dtype_to_datatype
 
 def validate_primary_key(primary_field: Any): ...
 def validate_partition_key(partition_key_field_name: Any, partition_key_field: Any, primary_field_name: Any): ...
 def validate_clustering_key(clustering_key_field_name: Any, clustering_key_field: Any): ...
 
 class CollectionSchema:
-    def __init__(self, fields: list, description: str = '', functions: list | None = None, **kwargs) -> None: ...
+    def __init__(self, fields: list, description: str = "", functions: list | None = None, **kwargs) -> None: ...
     def __len__(self) -> int: ...
     def __eq__(self, other: object): ...
     @classmethod
@@ -50,7 +67,7 @@ class FieldSchema:
     default_value: Incomplete
     element_type: Incomplete
     is_function_output: bool
-    def __init__(self, name: str, dtype: DataType, description: str = '', **kwargs) -> None: ...
+    def __init__(self, name: str, dtype: DataType, description: str = "", **kwargs) -> None: ...
     def __deepcopy__(self, memodict: dict | None = None): ...
     @classmethod
     def construct_from_dict(cls, raw: dict): ...
@@ -65,7 +82,15 @@ class FieldSchema:
     def dtype(self) -> DataType: ...
 
 class Function:
-    def __init__(self, name: str, function_type: FunctionType, input_field_names: str | list[str], output_field_names: str | list[str] | None = None, description: str = '', params: dict | None = None) -> None: ...
+    def __init__(
+        self,
+        name: str,
+        function_type: FunctionType,
+        input_field_names: str | list[str],
+        output_field_names: str | list[str] | None = None,
+        description: str = "",
+        params: dict | None = None,
+    ) -> None: ...
     @property
     def name(self): ...
     @property

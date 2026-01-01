@@ -1,10 +1,15 @@
 import datetime
-from .constants import BOUNDED_TS as BOUNDED_TS, EVENTUALLY_TS as EVENTUALLY_TS, GUARANTEE_TIMESTAMP as GUARANTEE_TIMESTAMP, ITERATOR_FIELD as ITERATOR_FIELD
+
+from _typeshed import Incomplete
+from pymilvus.grpc_gen import common_pb2 as common_pb2
+
+from .constants import BOUNDED_TS as BOUNDED_TS
+from .constants import EVENTUALLY_TS as EVENTUALLY_TS
+from .constants import GUARANTEE_TIMESTAMP as GUARANTEE_TIMESTAMP
+from .constants import ITERATOR_FIELD as ITERATOR_FIELD
 from .singleton_utils import Singleton as Singleton
 from .types import get_consistency_level as get_consistency_level
 from .utils import hybridts_to_unixtime as hybridts_to_unixtime
-from _typeshed import Incomplete
-from pymilvus.grpc_gen import common_pb2 as common_pb2
 
 ConsistencyLevel: Incomplete
 

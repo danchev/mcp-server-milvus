@@ -1,11 +1,14 @@
-from . import entity_helper as entity_helper
-from _typeshed import Incomplete
 from collections import UserDict
+from typing import Any
+
+from _typeshed import Incomplete
 from pymilvus.client.types import DataType as DataType
 from pymilvus.exceptions import MilvusException as MilvusException
-from pymilvus.grpc_gen import common_pb2 as common_pb2, schema_pb2 as schema_pb2
+from pymilvus.grpc_gen import common_pb2 as common_pb2
+from pymilvus.grpc_gen import schema_pb2 as schema_pb2
 from pymilvus.grpc_gen.schema_pb2 import FieldData as FieldData
-from typing import Any
+
+from . import entity_helper as entity_helper
 
 logger: Incomplete
 
@@ -16,7 +19,16 @@ class HybridHits(list):
     has_materialized: bool
     dynamic_fields: list[str]
     start: int
-    def __init__(self, start: int, end: int, all_pks: list[str | int], all_scores: list[float], fields_data: list[schema_pb2.FieldData], output_fields: list[str], pk_name: str) -> None: ...
+    def __init__(
+        self,
+        start: int,
+        end: int,
+        all_pks: list[str | int],
+        all_scores: list[float],
+        fields_data: list[schema_pb2.FieldData],
+        output_fields: list[str],
+        pk_name: str,
+    ) -> None: ...
     def __getitem__(self, key: int): ...
     def get_raw_item(self, idx: int): ...
     def __iter__(self): ...
@@ -25,7 +37,13 @@ class HybridHits(list):
 class SearchResult(list):
     recalls: Incomplete
     extra: Incomplete
-    def __init__(self, res: schema_pb2.SearchResultData, round_decimal: int | None = None, status: common_pb2.Status | None = None, session_ts: int | None = 0) -> None: ...
+    def __init__(
+        self,
+        res: schema_pb2.SearchResultData,
+        round_decimal: int | None = None,
+        status: common_pb2.Status | None = None,
+        session_ts: int | None = 0,
+    ) -> None: ...
     def materialize(self) -> None: ...
     def get_session_ts(self): ...
     def get_search_iterator_v2_results_info(self): ...
@@ -35,10 +53,18 @@ def get_field_data(field_data: FieldData): ...
 class Hits(list):
     ids: list[str | int]
     distances: list[float]
-    def __init__(self, topk: int, pks: list[int | str], distances: list[float], fields: dict[str, tuple[list[Any], schema_pb2.FieldData]], output_fields: list[str], pk_name: str) -> None: ...
+    def __init__(
+        self,
+        topk: int,
+        pks: list[int | str],
+        distances: list[float],
+        fields: dict[str, tuple[list[Any], schema_pb2.FieldData]],
+        output_fields: list[str],
+        pk_name: str,
+    ) -> None: ...
 
 class Hit(UserDict):
-    def __init__(self, *args, pk_name: str = '', **kwargs) -> None: ...
+    def __init__(self, *args, pk_name: str = "", **kwargs) -> None: ...
     def __getattr__(self, item: str): ...
     def to_dict(self) -> dict[str, Any]: ...
     @property

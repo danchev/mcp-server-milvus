@@ -28,7 +28,7 @@ classifiers = [
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "mcp[cli]>=1.21.0",
+    "mcp[cli]>=1.25.0",
     "pymilvus>=2.6.3",
 ]
 
@@ -45,13 +45,19 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.14.4",
-    "ty>=0.0.1a26",
+    "ruff>=0.14.10",
+    "ty>=0.0.8",
     {include-group = "commit"},
+    {include-group = "test"},
+]
+test = [
+    "pytest>=9.0.1",
+    "pytest-cov>=7.0.0",
+    "httpx>=0.28.1",
 ]
 commit = [
-    "commitizen>=4.9.1",
-    "pre-commit>=4.3.0",
+    "commitizen>=4.11.0",
+    "pre-commit>=4.5.1",
 ]
 
 [tool.ruff]
@@ -70,3 +76,14 @@ version_files = [
     "pyproject.toml:version"
 ]
 update_changelog_on_bump = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]

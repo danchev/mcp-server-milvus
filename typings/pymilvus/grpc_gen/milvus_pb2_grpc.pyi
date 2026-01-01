@@ -226,219 +226,1396 @@ def add_MilvusServiceServicer_to_server(servicer, server) -> None: ...
 
 class MilvusService:
     @staticmethod
-    def CreateCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def HasCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def LoadCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ReleaseCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def BatchDescribeCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetCollectionStatistics(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ShowCollections(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AlterCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AlterCollectionField(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreatePartition(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropPartition(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def HasPartition(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def LoadPartitions(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ReleasePartitions(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetPartitionStatistics(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ShowPartitions(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetLoadingProgress(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetLoadState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateAlias(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropAlias(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AlterAlias(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeAlias(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListAliases(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateIndex(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AlterIndex(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeIndex(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetIndexStatistics(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetIndexState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetIndexBuildProgress(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropIndex(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Insert(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Delete(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Upsert(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Search(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def HybridSearch(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Flush(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Query(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CalcDistance(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def FlushAll(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AddCollectionField(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetFlushState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetFlushAllState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetPersistentSegmentInfo(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetQuerySegmentInfo(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetReplicas(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Dummy(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def RegisterLink(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetMetrics(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetComponentStates(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def LoadBalance(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetCompactionState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ManualCompaction(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetCompactionStateWithPlans(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Import(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetImportState(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListImportTasks(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateCredential(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def UpdateCredential(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DeleteCredential(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListCredUsers(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateRole(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropRole(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def OperateUserRole(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def SelectRole(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def SelectUser(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def OperatePrivilege(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def OperatePrivilegeV2(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def SelectGrant(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetVersion(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CheckHealth(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateResourceGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropResourceGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def UpdateResourceGroups(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def TransferNode(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def TransferReplica(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListResourceGroups(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeResourceGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def RenameCollection(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListIndexedSegment(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeSegmentIndexData(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def Connect(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AllocTimestamp(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateDatabase(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropDatabase(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListDatabases(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AlterDatabase(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DescribeDatabase(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ReplicateMessage(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def BackupRBAC(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def RestoreRBAC(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreatePrivilegeGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropPrivilegeGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListPrivilegeGroups(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def OperatePrivilegeGroup(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def RunAnalyzer(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AddFileResource(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def RemoveFileResource(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListFileResources(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def AddUserTags(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DeleteUserTags(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def GetUserTags(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListUsersWithTag(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def CreateRowPolicy(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def DropRowPolicy(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
-    @staticmethod
-    def ListRowPolicies(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
+    def CreateCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def HasCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def LoadCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ReleaseCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def BatchDescribeCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetCollectionStatistics(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ShowCollections(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AlterCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AlterCollectionField(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreatePartition(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropPartition(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def HasPartition(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def LoadPartitions(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ReleasePartitions(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetPartitionStatistics(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ShowPartitions(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetLoadingProgress(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetLoadState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateAlias(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropAlias(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AlterAlias(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeAlias(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListAliases(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateIndex(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AlterIndex(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeIndex(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetIndexStatistics(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetIndexState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetIndexBuildProgress(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropIndex(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Insert(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Delete(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Upsert(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Search(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def HybridSearch(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Flush(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Query(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CalcDistance(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def FlushAll(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AddCollectionField(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetFlushState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetFlushAllState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetPersistentSegmentInfo(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetQuerySegmentInfo(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetReplicas(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Dummy(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def RegisterLink(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetMetrics(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetComponentStates(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def LoadBalance(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetCompactionState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ManualCompaction(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetCompactionStateWithPlans(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Import(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetImportState(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListImportTasks(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateCredential(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def UpdateCredential(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DeleteCredential(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListCredUsers(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateRole(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropRole(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def OperateUserRole(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def SelectRole(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def SelectUser(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def OperatePrivilege(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def OperatePrivilegeV2(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def SelectGrant(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetVersion(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CheckHealth(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateResourceGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropResourceGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def UpdateResourceGroups(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def TransferNode(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def TransferReplica(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListResourceGroups(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeResourceGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def RenameCollection(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListIndexedSegment(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeSegmentIndexData(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def Connect(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AllocTimestamp(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateDatabase(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropDatabase(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListDatabases(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AlterDatabase(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DescribeDatabase(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ReplicateMessage(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def BackupRBAC(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def RestoreRBAC(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreatePrivilegeGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropPrivilegeGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListPrivilegeGroups(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def OperatePrivilegeGroup(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def RunAnalyzer(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AddFileResource(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def RemoveFileResource(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListFileResources(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def AddUserTags(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DeleteUserTags(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def GetUserTags(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListUsersWithTag(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def CreateRowPolicy(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def DropRowPolicy(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
+    @staticmethod
+    def ListRowPolicies(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...
 
 class ProxyServiceStub:
     RegisterLink: Incomplete
@@ -451,4 +1628,15 @@ def add_ProxyServiceServicer_to_server(servicer, server) -> None: ...
 
 class ProxyService:
     @staticmethod
-    def RegisterLink(request, target, options=(), channel_credentials=None, call_credentials=None, insecure: bool = False, compression=None, wait_for_ready=None, timeout=None, metadata=None): ...
+    def RegisterLink(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure: bool = False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ): ...

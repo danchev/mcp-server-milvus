@@ -1,5 +1,6 @@
-from pymilvus.exceptions import ParamError as ParamError
 from typing import Any
+
+from pymilvus.exceptions import ParamError as ParamError
 
 def validate_params(params: dict[str, Any], expected_type: type | tuple[type, ...]): ...
 def validate_param(param_name: str, param: Any, expected_type: type | tuple[type, ...]) -> None: ...

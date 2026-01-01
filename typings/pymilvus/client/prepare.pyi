@@ -1,34 +1,82 @@
-from . import __version__ as __version__, blob as blob, check as check, entity_helper as entity_helper, ts_utils as ts_utils, utils as utils
-from .abstract import BaseRanker as BaseRanker
-from .check import check_pass_param as check_pass_param, is_legal_collection_properties as is_legal_collection_properties
-from .constants import COLLECTION_ID as COLLECTION_ID, DEFAULT_CONSISTENCY_LEVEL as DEFAULT_CONSISTENCY_LEVEL, DYNAMIC_FIELD_NAME as DYNAMIC_FIELD_NAME, GROUP_BY_FIELD as GROUP_BY_FIELD, GROUP_SIZE as GROUP_SIZE, HINTS as HINTS, ITERATOR_FIELD as ITERATOR_FIELD, ITER_SEARCH_BATCH_SIZE_KEY as ITER_SEARCH_BATCH_SIZE_KEY, ITER_SEARCH_ID_KEY as ITER_SEARCH_ID_KEY, ITER_SEARCH_LAST_BOUND_KEY as ITER_SEARCH_LAST_BOUND_KEY, ITER_SEARCH_V2_KEY as ITER_SEARCH_V2_KEY, JSON_CAST_TYPE as JSON_CAST_TYPE, JSON_PATH as JSON_PATH, PAGE_RETAIN_ORDER_FIELD as PAGE_RETAIN_ORDER_FIELD, RANK_GROUP_SCORER as RANK_GROUP_SCORER, REDUCE_STOP_FOR_BEST as REDUCE_STOP_FOR_BEST, STRICT_GROUP_SIZE as STRICT_GROUP_SIZE
-from .types import DataType as DataType, PlaceholderType as PlaceholderType, ResourceGroupConfig as ResourceGroupConfig, get_consistency_level as get_consistency_level
-from .utils import get_params as get_params, traverse_info as traverse_info, traverse_upsert_info as traverse_upsert_info
-from pymilvus.exceptions import DataNotMatchException as DataNotMatchException, ExceptionsMessage as ExceptionsMessage, ParamError as ParamError
-from pymilvus.grpc_gen import milvus_pb2 as milvus_types, schema_pb2 as schema_types
-from pymilvus.orm.schema import CollectionSchema as CollectionSchema, FieldSchema as FieldSchema, Function as Function
-from pymilvus.orm.types import infer_dtype_by_scalar_data as infer_dtype_by_scalar_data
 from typing import Any, Iterable, Mapping
+
+from pymilvus.exceptions import DataNotMatchException as DataNotMatchException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.exceptions import ParamError as ParamError
+from pymilvus.grpc_gen import milvus_pb2 as milvus_types
+from pymilvus.grpc_gen import schema_pb2 as schema_types
+from pymilvus.orm.schema import CollectionSchema as CollectionSchema
+from pymilvus.orm.schema import FieldSchema as FieldSchema
+from pymilvus.orm.schema import Function as Function
+from pymilvus.orm.types import infer_dtype_by_scalar_data as infer_dtype_by_scalar_data
+
+from . import __version__ as __version__
+from . import blob as blob
+from . import check as check
+from . import entity_helper as entity_helper
+from . import ts_utils as ts_utils
+from . import utils as utils
+from .abstract import BaseRanker as BaseRanker
+from .check import check_pass_param as check_pass_param
+from .check import is_legal_collection_properties as is_legal_collection_properties
+from .constants import COLLECTION_ID as COLLECTION_ID
+from .constants import DEFAULT_CONSISTENCY_LEVEL as DEFAULT_CONSISTENCY_LEVEL
+from .constants import DYNAMIC_FIELD_NAME as DYNAMIC_FIELD_NAME
+from .constants import GROUP_BY_FIELD as GROUP_BY_FIELD
+from .constants import GROUP_SIZE as GROUP_SIZE
+from .constants import HINTS as HINTS
+from .constants import ITER_SEARCH_BATCH_SIZE_KEY as ITER_SEARCH_BATCH_SIZE_KEY
+from .constants import ITER_SEARCH_ID_KEY as ITER_SEARCH_ID_KEY
+from .constants import ITER_SEARCH_LAST_BOUND_KEY as ITER_SEARCH_LAST_BOUND_KEY
+from .constants import ITER_SEARCH_V2_KEY as ITER_SEARCH_V2_KEY
+from .constants import ITERATOR_FIELD as ITERATOR_FIELD
+from .constants import JSON_CAST_TYPE as JSON_CAST_TYPE
+from .constants import JSON_PATH as JSON_PATH
+from .constants import PAGE_RETAIN_ORDER_FIELD as PAGE_RETAIN_ORDER_FIELD
+from .constants import RANK_GROUP_SCORER as RANK_GROUP_SCORER
+from .constants import REDUCE_STOP_FOR_BEST as REDUCE_STOP_FOR_BEST
+from .constants import STRICT_GROUP_SIZE as STRICT_GROUP_SIZE
+from .types import DataType as DataType
+from .types import PlaceholderType as PlaceholderType
+from .types import ResourceGroupConfig as ResourceGroupConfig
+from .types import get_consistency_level as get_consistency_level
+from .utils import get_params as get_params
+from .utils import traverse_info as traverse_info
+from .utils import traverse_upsert_info as traverse_upsert_info
 
 class Prepare:
     @classmethod
-    def create_collection_request(cls, collection_name: str, fields: dict[str, Iterable] | CollectionSchema, **kwargs) -> milvus_types.CreateCollectionRequest: ...
+    def create_collection_request(
+        cls, collection_name: str, fields: dict[str, Iterable] | CollectionSchema, **kwargs
+    ) -> milvus_types.CreateCollectionRequest: ...
     @classmethod
-    def get_schema_from_collection_schema(cls, collection_name: str, fields: CollectionSchema) -> schema_types.CollectionSchema: ...
+    def get_schema_from_collection_schema(
+        cls, collection_name: str, fields: CollectionSchema
+    ) -> schema_types.CollectionSchema: ...
     @staticmethod
-    def get_field_schema(field: dict, primary_field: str | None = None, auto_id_field: str | None = None) -> tuple[schema_types.FieldSchema, str | None, str | None]: ...
+    def get_field_schema(
+        field: dict, primary_field: str | None = None, auto_id_field: str | None = None
+    ) -> tuple[schema_types.FieldSchema, str | None, str | None]: ...
     @classmethod
-    def get_schema(cls, collection_name: str, fields: dict[str, Iterable], **kwargs) -> schema_types.CollectionSchema: ...
+    def get_schema(
+        cls, collection_name: str, fields: dict[str, Iterable], **kwargs
+    ) -> schema_types.CollectionSchema: ...
     @classmethod
     def drop_collection_request(cls, collection_name: str) -> milvus_types.DropCollectionRequest: ...
     @classmethod
-    def add_collection_field_request(cls, collection_name: str, field_schema: FieldSchema) -> milvus_types.AddCollectionFieldRequest: ...
+    def add_collection_field_request(
+        cls, collection_name: str, field_schema: FieldSchema
+    ) -> milvus_types.AddCollectionFieldRequest: ...
     @classmethod
     def describe_collection_request(cls, collection_name: str) -> milvus_types.DescribeCollectionRequest: ...
     @classmethod
-    def alter_collection_request(cls, collection_name: str, properties: dict | None = None, delete_keys: list[str] | None = None) -> milvus_types.AlterCollectionRequest: ...
+    def alter_collection_request(
+        cls, collection_name: str, properties: dict | None = None, delete_keys: list[str] | None = None
+    ) -> milvus_types.AlterCollectionRequest: ...
     @classmethod
-    def alter_collection_field_request(cls, collection_name: str, field_name: str, field_param: dict) -> milvus_types.AlterCollectionFieldRequest: ...
+    def alter_collection_field_request(
+        cls, collection_name: str, field_name: str, field_param: dict
+    ) -> milvus_types.AlterCollectionFieldRequest: ...
     @classmethod
     def collection_stats_request(cls, collection_name: str): ...
     @classmethod
@@ -44,7 +92,9 @@ class Prepare:
     @classmethod
     def partition_stats_request(cls, collection_name: str, partition_name: str): ...
     @classmethod
-    def show_partitions_request(cls, collection_name: str, partition_names: list[str] | None = None, type_in_memory: bool = False): ...
+    def show_partitions_request(
+        cls, collection_name: str, partition_names: list[str] | None = None, type_in_memory: bool = False
+    ): ...
     @classmethod
     def get_loading_progress(cls, collection_name: str, partition_names: list[str] | None = None): ...
     @classmethod
@@ -56,21 +106,70 @@ class Prepare:
     @classmethod
     def partition_name(cls, collection_name: str, partition_name: str): ...
     @classmethod
-    def row_insert_param(cls, collection_name: str, entities: list, partition_name: str, fields_info: dict, schema_timestamp: int = 0, enable_dynamic: bool = False): ...
+    def row_insert_param(
+        cls,
+        collection_name: str,
+        entities: list,
+        partition_name: str,
+        fields_info: dict,
+        schema_timestamp: int = 0,
+        enable_dynamic: bool = False,
+    ): ...
     @classmethod
-    def row_upsert_param(cls, collection_name: str, entities: list, partition_name: str, fields_info: Any, enable_dynamic: bool = False, schema_timestamp: int = 0, partial_update: bool = False): ...
+    def row_upsert_param(
+        cls,
+        collection_name: str,
+        entities: list,
+        partition_name: str,
+        fields_info: Any,
+        enable_dynamic: bool = False,
+        schema_timestamp: int = 0,
+        partial_update: bool = False,
+    ): ...
     @classmethod
     def batch_insert_param(cls, collection_name: str, entities: list, partition_name: str, fields_info: Any): ...
     @classmethod
-    def batch_upsert_param(cls, collection_name: str, entities: list, partition_name: str, fields_info: Any, partial_update: bool = False): ...
+    def batch_upsert_param(
+        cls, collection_name: str, entities: list, partition_name: str, fields_info: Any, partial_update: bool = False
+    ): ...
     @classmethod
-    def delete_request(cls, collection_name: str, filter: str, partition_name: str | None = None, consistency_level: int | str | None = None, **kwargs): ...
+    def delete_request(
+        cls,
+        collection_name: str,
+        filter: str,
+        partition_name: str | None = None,
+        consistency_level: int | str | None = None,
+        **kwargs,
+    ): ...
     @classmethod
     def prepare_expression_template(cls, values: dict) -> Any: ...
     @classmethod
-    def search_requests_with_expr(cls, collection_name: str, data: list | utils.SparseMatrixInputType, anns_field: str, param: dict, limit: int, expr: str | None = None, partition_names: list[str] | None = None, output_fields: list[str] | None = None, round_decimal: int = -1, ranker: Function | None = None, **kwargs) -> milvus_types.SearchRequest: ...
+    def search_requests_with_expr(
+        cls,
+        collection_name: str,
+        data: list | utils.SparseMatrixInputType,
+        anns_field: str,
+        param: dict,
+        limit: int,
+        expr: str | None = None,
+        partition_names: list[str] | None = None,
+        output_fields: list[str] | None = None,
+        round_decimal: int = -1,
+        ranker: Function | None = None,
+        **kwargs,
+    ) -> milvus_types.SearchRequest: ...
     @classmethod
-    def hybrid_search_request_with_ranker(cls, collection_name: str, reqs: list, rerank: BaseRanker | Function, limit: int, partition_names: list[str] | None = None, output_fields: list[str] | None = None, round_decimal: int = -1, **kwargs) -> milvus_types.HybridSearchRequest: ...
+    def hybrid_search_request_with_ranker(
+        cls,
+        collection_name: str,
+        reqs: list,
+        rerank: BaseRanker | Function,
+        limit: int,
+        partition_names: list[str] | None = None,
+        output_fields: list[str] | None = None,
+        round_decimal: int = -1,
+        **kwargs,
+    ) -> milvus_types.HybridSearchRequest: ...
     @staticmethod
     def ranker_to_function_score(ranker: Function) -> schema_types.FunctionScore: ...
     @classmethod
@@ -82,7 +181,7 @@ class Prepare:
     @classmethod
     def describe_alias_request(cls, alias: str): ...
     @classmethod
-    def list_aliases_request(cls, collection_name: str, db_name: str = ''): ...
+    def list_aliases_request(cls, collection_name: str, db_name: str = ""): ...
     @classmethod
     def create_index_request(cls, collection_name: str, field_name: str, params: dict, **kwargs): ...
     @classmethod
@@ -100,7 +199,9 @@ class Prepare:
     @classmethod
     def release_collection(cls, db_name: str, collection_name: str): ...
     @classmethod
-    def load_partitions(cls, collection_name: str, partition_names: list[str], replica_number: int | None = None, **kwargs): ...
+    def load_partitions(
+        cls, collection_name: str, partition_names: list[str], replica_number: int | None = None, **kwargs
+    ): ...
     @classmethod
     def release_partitions(cls, db_name: str, collection_name: str, partition_names: list[str]): ...
     @classmethod
@@ -120,11 +221,17 @@ class Prepare:
     @classmethod
     def dummy_request(cls, request_type: Any): ...
     @classmethod
-    def retrieve_request(cls, collection_name: str, ids: list[str], output_fields: list[str], partition_names: list[str]): ...
+    def retrieve_request(
+        cls, collection_name: str, ids: list[str], output_fields: list[str], partition_names: list[str]
+    ): ...
     @classmethod
-    def query_request(cls, collection_name: str, expr: str, output_fields: list[str], partition_names: list[str], **kwargs): ...
+    def query_request(
+        cls, collection_name: str, expr: str, output_fields: list[str], partition_names: list[str], **kwargs
+    ): ...
     @classmethod
-    def load_balance_request(cls, collection_name: str, src_node_id: int, dst_node_ids: list[int], sealed_segment_ids: list[int]): ...
+    def load_balance_request(
+        cls, collection_name: str, src_node_id: int, dst_node_ids: list[int], sealed_segment_ids: list[int]
+    ): ...
     @classmethod
     def manual_compaction(cls, collection_name: str, is_clustering: bool, collection_id: int | None = None): ...
     @classmethod
@@ -158,9 +265,13 @@ class Prepare:
     @classmethod
     def select_user_request(cls, username: str, include_role_info: bool): ...
     @classmethod
-    def operate_privilege_request(cls, role_name: str, object: Any, object_name: str, privilege: str, db_name: str, operate_privilege_type: Any): ...
+    def operate_privilege_request(
+        cls, role_name: str, object: Any, object_name: str, privilege: str, db_name: str, operate_privilege_type: Any
+    ): ...
     @classmethod
-    def operate_privilege_v2_request(cls, role_name: str, privilege: str, operate_privilege_type: Any, db_name: str, collection_name: str): ...
+    def operate_privilege_v2_request(
+        cls, role_name: str, privilege: str, operate_privilege_type: Any, db_name: str, collection_name: str
+    ): ...
     @classmethod
     def select_grant_request(cls, role_name: str, object: str, object_name: str, db_name: str): ...
     @classmethod
@@ -204,6 +315,17 @@ class Prepare:
     @classmethod
     def list_privilege_groups_req(cls): ...
     @classmethod
-    def operate_privilege_group_req(cls, privilege_group: str, privileges: list[str], operate_privilege_group_type: Any): ...
+    def operate_privilege_group_req(
+        cls, privilege_group: str, privileges: list[str], operate_privilege_group_type: Any
+    ): ...
     @classmethod
-    def run_analyzer(cls, texts: str | list[str], analyzer_params: str | dict | None = None, with_hash: bool = False, with_detail: bool = False, collection_name: str | None = None, field_name: str | None = None, analyzer_names: str | list[str] | None = None): ...
+    def run_analyzer(
+        cls,
+        texts: str | list[str],
+        analyzer_params: str | dict | None = None,
+        with_hash: bool = False,
+        with_detail: bool = False,
+        collection_name: str | None = None,
+        field_name: str | None = None,
+        analyzer_names: str | list[str] | None = None,
+    ): ...

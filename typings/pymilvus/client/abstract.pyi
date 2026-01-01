@@ -1,12 +1,20 @@
 import abc
-from . import utils as utils
-from .constants import DEFAULT_CONSISTENCY_LEVEL as DEFAULT_CONSISTENCY_LEVEL, RANKER_TYPE_RRF as RANKER_TYPE_RRF, RANKER_TYPE_WEIGHTED as RANKER_TYPE_WEIGHTED
-from .search_result import Hit as Hit, Hits as Hits, SearchResult as SearchResult
-from .types import DataType as DataType, FunctionType as FunctionType
-from _typeshed import Incomplete
-from pymilvus.exceptions import DataTypeNotMatchException as DataTypeNotMatchException, ExceptionsMessage as ExceptionsMessage
-from pymilvus.settings import Config as Config
 from typing import Any
+
+from _typeshed import Incomplete
+from pymilvus.exceptions import DataTypeNotMatchException as DataTypeNotMatchException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.settings import Config as Config
+
+from . import utils as utils
+from .constants import DEFAULT_CONSISTENCY_LEVEL as DEFAULT_CONSISTENCY_LEVEL
+from .constants import RANKER_TYPE_RRF as RANKER_TYPE_RRF
+from .constants import RANKER_TYPE_WEIGHTED as RANKER_TYPE_WEIGHTED
+from .search_result import Hit as Hit
+from .search_result import Hits as Hits
+from .search_result import SearchResult as SearchResult
+from .types import DataType as DataType
+from .types import FunctionType as FunctionType
 
 logger: Incomplete
 
@@ -98,7 +106,15 @@ class WeightedRanker(BaseRanker):
     def dict(self): ...
 
 class AnnSearchRequest:
-    def __init__(self, data: list | utils.SparseMatrixInputType, anns_field: str, param: dict, limit: int, expr: str | None = None, expr_params: dict | None = None) -> None: ...
+    def __init__(
+        self,
+        data: list | utils.SparseMatrixInputType,
+        anns_field: str,
+        param: dict,
+        limit: int,
+        expr: str | None = None,
+        expr_params: dict | None = None,
+    ) -> None: ...
     @property
     def data(self): ...
     @property

@@ -1,7 +1,10 @@
-from .exceptions import ErrorCode as ErrorCode, MilvusException as MilvusException
-from .grpc_gen import common_pb2 as common_pb2
-from _typeshed import Incomplete
 from typing import Any, Callable
+
+from _typeshed import Incomplete
+
+from .exceptions import ErrorCode as ErrorCode
+from .exceptions import MilvusException as MilvusException
+from .grpc_gen import common_pb2 as common_pb2
 
 LOGGER: Incomplete
 WARNING_COLOR: str
@@ -10,8 +13,10 @@ def deprecated(func: Any): ...
 
 IGNORE_RETRY_CODES: Incomplete
 
-def retry_on_rpc_failure(*, retry_times: int = 75, initial_back_off: float = 0.01, max_back_off: float = 3, back_off_multiplier: int = 3): ...
-def error_handler(func_name: str = ''): ...
+def retry_on_rpc_failure(
+    *, retry_times: int = 75, initial_back_off: float = 0.01, max_back_off: float = 3, back_off_multiplier: int = 3
+): ...
+def error_handler(func_name: str = ""): ...
 def tracing_request(): ...
 def ignore_unimplemented(default_return_value: Any): ...
 def upgrade_reminder(func: Callable): ...

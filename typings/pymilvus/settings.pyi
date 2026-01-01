@@ -1,4 +1,5 @@
 import logging
+
 from _typeshed import Incomplete
 
 class Config:

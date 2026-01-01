@@ -1,9 +1,11 @@
-from pymilvus.exceptions import CollectionNotExistException as CollectionNotExistException, ExceptionsMessage as ExceptionsMessage
-from pymilvus.settings import Config as Config
 from typing import TypeVar
 
-Index = TypeVar('Index')
-Collection = TypeVar('Collection')
+from pymilvus.exceptions import CollectionNotExistException as CollectionNotExistException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.settings import Config as Config
+
+Index = TypeVar("Index")
+Collection = TypeVar("Collection")
 
 class Index:
     def __init__(self, collection: Collection, field_name: str, index_params: dict, **kwargs) -> None: ...

@@ -6,3 +6,6 @@ try:
     __version__ = version("mcp-server-milvus")
 except Exception:  # pragma: no cover
     __version__ = "0.0.0"
+
+
+__all__ = ["__version__"]

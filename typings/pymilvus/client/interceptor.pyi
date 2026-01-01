@@ -1,9 +1,15 @@
-import grpc
 from typing import Any, Callable, NamedTuple
+
+import grpc
 
 def current_time_ms() -> str: ...
 
-class _GenericClientInterceptor(grpc.UnaryUnaryClientInterceptor, grpc.UnaryStreamClientInterceptor, grpc.StreamUnaryClientInterceptor, grpc.StreamStreamClientInterceptor):
+class _GenericClientInterceptor(
+    grpc.UnaryUnaryClientInterceptor,
+    grpc.UnaryStreamClientInterceptor,
+    grpc.StreamUnaryClientInterceptor,
+    grpc.StreamStreamClientInterceptor,
+):
     def __init__(self, interceptor_function: Callable) -> None: ...
     def intercept_unary_unary(self, continuation: Callable, client_call_details: Any, request: Any): ...
     def intercept_unary_stream(self, continuation: Callable, client_call_details: Any, request: Any): ...

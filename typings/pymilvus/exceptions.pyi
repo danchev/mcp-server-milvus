@@ -1,5 +1,6 @@
-from .grpc_gen import common_pb2 as common_pb2
 from enum import IntEnum
+
+from .grpc_gen import common_pb2 as common_pb2
 
 class ErrorCode(IntEnum):
     SUCCESS = 0
@@ -10,7 +11,7 @@ class ErrorCode(IntEnum):
     INDEX_NOT_FOUND = 700
 
 class MilvusException(Exception):
-    def __init__(self, code: int = ..., message: str = '', compatible_code: int = ...) -> None: ...
+    def __init__(self, code: int = ..., message: str = "", compatible_code: int = ...) -> None: ...
     @property
     def code(self): ...
     @property

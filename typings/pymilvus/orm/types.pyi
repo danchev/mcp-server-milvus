@@ -1,6 +1,7 @@
+from typing import Any
+
 from _typeshed import Incomplete
 from pymilvus.client.types import DataType as DataType
-from typing import Any
 
 dtype_str_map: Incomplete
 numpy_dtype_str_map: Incomplete

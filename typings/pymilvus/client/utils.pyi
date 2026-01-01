@@ -1,12 +1,23 @@
 import datetime
-from .constants import LOGICAL_BITS as LOGICAL_BITS, LOGICAL_BITS_MASK as LOGICAL_BITS_MASK
-from .types import DataType as DataType
-from _typeshed import Incomplete
 from datetime import timedelta
-from pymilvus.exceptions import MilvusException as MilvusException, ParamError as ParamError
-from pymilvus.grpc_gen.common_pb2 import Status as Status
-from scipy.sparse import bsr_array as bsr_array, coo_array as coo_array, csc_array as csc_array, csr_array as csr_array, dia_array as dia_array, dok_array as dok_array, lil_array as lil_array, spmatrix as spmatrix
 from typing import Any
+
+from _typeshed import Incomplete
+from pymilvus.exceptions import MilvusException as MilvusException
+from pymilvus.exceptions import ParamError as ParamError
+from pymilvus.grpc_gen.common_pb2 import Status as Status
+from scipy.sparse import bsr_array as bsr_array
+from scipy.sparse import coo_array as coo_array
+from scipy.sparse import csc_array as csc_array
+from scipy.sparse import csr_array as csr_array
+from scipy.sparse import dia_array as dia_array
+from scipy.sparse import dok_array as dok_array
+from scipy.sparse import lil_array as lil_array
+from scipy.sparse import spmatrix as spmatrix
+
+from .constants import LOGICAL_BITS as LOGICAL_BITS
+from .constants import LOGICAL_BITS_MASK as LOGICAL_BITS_MASK
+from .types import DataType as DataType
 
 MILVUS: str
 ZILLIZ: str
@@ -37,6 +48,7 @@ class SciPyHelper:
     def is_sparray(cls, data: Any): ...
     @classmethod
     def is_scipy_sparse(cls, data: Any): ...
+
 SparseRowOutputType = dict[int, float]
 SparseMatrixInputType: Incomplete
 

@@ -1,19 +1,51 @@
+from typing import Any, Callable, TypeVar
+
+from _typeshed import Incomplete
+from pymilvus.client import entity_helper as entity_helper
+from pymilvus.client import utils as utils
+from pymilvus.client.abstract import LoopBase as LoopBase
+from pymilvus.client.search_result import Hits as Hits
+from pymilvus.exceptions import MilvusException as MilvusException
+from pymilvus.exceptions import ParamError as ParamError
+from pymilvus.grpc_gen import milvus_pb2 as milvus_types
+
 from .connections import Connections as Connections
-from .constants import BATCH_SIZE as BATCH_SIZE, CALC_DIST_BM25 as CALC_DIST_BM25, CALC_DIST_COSINE as CALC_DIST_COSINE, CALC_DIST_HAMMING as CALC_DIST_HAMMING, CALC_DIST_IP as CALC_DIST_IP, CALC_DIST_JACCARD as CALC_DIST_JACCARD, CALC_DIST_L2 as CALC_DIST_L2, CALC_DIST_TANIMOTO as CALC_DIST_TANIMOTO, COLLECTION_ID as COLLECTION_ID, DEFAULT_SEARCH_EXTENSION_RATE as DEFAULT_SEARCH_EXTENSION_RATE, EF as EF, FIELDS as FIELDS, GUARANTEE_TIMESTAMP as GUARANTEE_TIMESTAMP, INT64_MAX as INT64_MAX, IS_PRIMARY as IS_PRIMARY, ITERATOR_FIELD as ITERATOR_FIELD, ITERATOR_SESSION_CP_FILE as ITERATOR_SESSION_CP_FILE, ITERATOR_SESSION_TS_FIELD as ITERATOR_SESSION_TS_FIELD, MAX_BATCH_SIZE as MAX_BATCH_SIZE, MAX_FILTERED_IDS_COUNT_ITERATION as MAX_FILTERED_IDS_COUNT_ITERATION, MAX_TRY_TIME as MAX_TRY_TIME, METRIC_TYPE as METRIC_TYPE, MILVUS_LIMIT as MILVUS_LIMIT, OFFSET as OFFSET, PARAMS as PARAMS, RADIUS as RADIUS, RANGE_FILTER as RANGE_FILTER, REDUCE_STOP_FOR_BEST as REDUCE_STOP_FOR_BEST, UNLIMITED as UNLIMITED
+from .constants import BATCH_SIZE as BATCH_SIZE
+from .constants import CALC_DIST_BM25 as CALC_DIST_BM25
+from .constants import CALC_DIST_COSINE as CALC_DIST_COSINE
+from .constants import CALC_DIST_HAMMING as CALC_DIST_HAMMING
+from .constants import CALC_DIST_IP as CALC_DIST_IP
+from .constants import CALC_DIST_JACCARD as CALC_DIST_JACCARD
+from .constants import CALC_DIST_L2 as CALC_DIST_L2
+from .constants import CALC_DIST_TANIMOTO as CALC_DIST_TANIMOTO
+from .constants import COLLECTION_ID as COLLECTION_ID
+from .constants import DEFAULT_SEARCH_EXTENSION_RATE as DEFAULT_SEARCH_EXTENSION_RATE
+from .constants import EF as EF
+from .constants import FIELDS as FIELDS
+from .constants import GUARANTEE_TIMESTAMP as GUARANTEE_TIMESTAMP
+from .constants import INT64_MAX as INT64_MAX
+from .constants import IS_PRIMARY as IS_PRIMARY
+from .constants import ITERATOR_FIELD as ITERATOR_FIELD
+from .constants import ITERATOR_SESSION_CP_FILE as ITERATOR_SESSION_CP_FILE
+from .constants import ITERATOR_SESSION_TS_FIELD as ITERATOR_SESSION_TS_FIELD
+from .constants import MAX_BATCH_SIZE as MAX_BATCH_SIZE
+from .constants import MAX_FILTERED_IDS_COUNT_ITERATION as MAX_FILTERED_IDS_COUNT_ITERATION
+from .constants import MAX_TRY_TIME as MAX_TRY_TIME
+from .constants import METRIC_TYPE as METRIC_TYPE
+from .constants import MILVUS_LIMIT as MILVUS_LIMIT
+from .constants import OFFSET as OFFSET
+from .constants import PARAMS as PARAMS
+from .constants import RADIUS as RADIUS
+from .constants import RANGE_FILTER as RANGE_FILTER
+from .constants import REDUCE_STOP_FOR_BEST as REDUCE_STOP_FOR_BEST
+from .constants import UNLIMITED as UNLIMITED
 from .schema import CollectionSchema as CollectionSchema
 from .types import DataType as DataType
 from .utility import mkts_from_datetime as mkts_from_datetime
-from _typeshed import Incomplete
-from pymilvus.client import entity_helper as entity_helper, utils as utils
-from pymilvus.client.abstract import LoopBase as LoopBase
-from pymilvus.client.search_result import Hits as Hits
-from pymilvus.exceptions import MilvusException as MilvusException, ParamError as ParamError
-from pymilvus.grpc_gen import milvus_pb2 as milvus_types
-from typing import Any, Callable, TypeVar
 
 log: Incomplete
-QueryIterator = TypeVar('QueryIterator')
-SearchIterator = TypeVar('SearchIterator')
+QueryIterator = TypeVar("QueryIterator")
+SearchIterator = TypeVar("SearchIterator")
 
 def fall_back_to_latest_session_ts(): ...
 def assert_info(condition: bool, message: str): ...
@@ -22,7 +54,19 @@ def extend_batch_size(batch_size: int, next_param: dict, to_extend_batch_size: b
 def check_set_flag(obj: Any, flag_name: str, kwargs: dict[str, Any], key: str): ...
 
 class QueryIterator:
-    def __init__(self, connection: Connections, collection_name: str, batch_size: int | None = 1000, limit: int | None = -1, expr: str | None = None, output_fields: list[str] | None = None, partition_names: list[str] | None = None, schema: CollectionSchema | None = None, timeout: float | None = None, **kwargs) -> None: ...
+    def __init__(
+        self,
+        connection: Connections,
+        collection_name: str,
+        batch_size: int | None = 1000,
+        limit: int | None = -1,
+        expr: str | None = None,
+        output_fields: list[str] | None = None,
+        partition_names: list[str] | None = None,
+        schema: CollectionSchema | None = None,
+        timeout: float | None = None,
+        **kwargs,
+    ) -> None: ...
     def get_cursor(self) -> milvus_types.QueryCursor: ...
     def next(self): ...
     def close(self) -> None: ...
@@ -40,7 +84,23 @@ class SearchPage(LoopBase):
     def distances(self): ...
 
 class SearchIterator:
-    def __init__(self, connection: Connections, collection_name: str, data: list | utils.SparseMatrixInputType, ann_field: str, param: dict, batch_size: int | None = 1000, limit: int | None = ..., expr: str | None = None, partition_names: list[str] | None = None, output_fields: list[str] | None = None, timeout: float | None = None, round_decimal: int = -1, schema: CollectionSchema | None = None, **kwargs) -> None: ...
+    def __init__(
+        self,
+        connection: Connections,
+        collection_name: str,
+        data: list | utils.SparseMatrixInputType,
+        ann_field: str,
+        param: dict,
+        batch_size: int | None = 1000,
+        limit: int | None = ...,
+        expr: str | None = None,
+        partition_names: list[str] | None = None,
+        output_fields: list[str] | None = None,
+        timeout: float | None = None,
+        round_decimal: int = -1,
+        schema: CollectionSchema | None = None,
+        **kwargs,
+    ) -> None: ...
     def next(self): ...
     def close(self) -> None: ...
 

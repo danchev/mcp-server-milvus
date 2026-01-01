@@ -1,9 +1,11 @@
 import datetime
-from . import entity_helper as entity_helper
-from .singleton_utils import Singleton as Singleton
+from typing import Any, Callable
+
 from _typeshed import Incomplete
 from pymilvus.exceptions import ParamError as ParamError
-from typing import Any, Callable
+
+from . import entity_helper as entity_helper
+from .singleton_utils import Singleton as Singleton
 
 def validate_strs(**kwargs) -> None: ...
 def validate_nullable_strs(**kwargs) -> None: ...

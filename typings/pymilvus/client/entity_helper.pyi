@@ -1,17 +1,27 @@
-from .types import DataType as DataType
-from .utils import SciPyHelper as SciPyHelper, SparseMatrixInputType as SparseMatrixInputType, SparseRowOutputType as SparseRowOutputType, sparse_parse_single_row as sparse_parse_single_row
+from typing import Any, Iterable
+
 from _typeshed import Incomplete
-from pymilvus.exceptions import DataNotMatchException as DataNotMatchException, ExceptionsMessage as ExceptionsMessage, MilvusException as MilvusException, ParamError as ParamError
+from pymilvus.exceptions import DataNotMatchException as DataNotMatchException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.exceptions import MilvusException as MilvusException
+from pymilvus.exceptions import ParamError as ParamError
 from pymilvus.grpc_gen import schema_pb2 as schema_types
 from pymilvus.settings import Config as Config
-from typing import Any, Iterable
+
+from .types import DataType as DataType
+from .utils import SciPyHelper as SciPyHelper
+from .utils import SparseMatrixInputType as SparseMatrixInputType
+from .utils import SparseRowOutputType as SparseRowOutputType
+from .utils import sparse_parse_single_row as sparse_parse_single_row
 
 logger: Incomplete
 CHECK_STR_ARRAY: bool
 
 def entity_is_sparse_matrix(entity: Any): ...
 def sparse_rows_to_proto(data: SparseMatrixInputType) -> schema_types.SparseFloatArray: ...
-def sparse_proto_to_rows(sfv: schema_types.SparseFloatArray, start: int | None = None, end: int | None = None) -> Iterable[SparseRowOutputType]: ...
+def sparse_proto_to_rows(
+    sfv: schema_types.SparseFloatArray, start: int | None = None, end: int | None = None
+) -> Iterable[SparseRowOutputType]: ...
 def get_input_num_rows(entity: Any) -> int: ...
 def entity_type_to_dtype(entity_type: Any): ...
 def get_max_len_of_var_char(field_info: dict) -> int: ...

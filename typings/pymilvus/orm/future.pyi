@@ -1,7 +1,9 @@
-from .mutation import MutationResult as MutationResult
+from typing import Any
+
 from pymilvus.client.search_result import SearchResult as SearchResult
 from pymilvus.grpc_gen import schema_pb2 as schema_pb2
-from typing import Any
+
+from .mutation import MutationResult as MutationResult
 
 class BaseFuture:
     def __init__(self, future: Any) -> None: ...

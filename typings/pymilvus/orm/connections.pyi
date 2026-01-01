@@ -1,10 +1,15 @@
+from typing import Callable
+
 from _typeshed import Incomplete
 from pymilvus.client.async_grpc_handler import AsyncGrpcHandler as AsyncGrpcHandler
-from pymilvus.client.check import is_legal_address as is_legal_address, is_legal_host as is_legal_host, is_legal_port as is_legal_port
+from pymilvus.client.check import is_legal_address as is_legal_address
+from pymilvus.client.check import is_legal_host as is_legal_host
+from pymilvus.client.check import is_legal_port as is_legal_port
 from pymilvus.client.grpc_handler import GrpcHandler as GrpcHandler
-from pymilvus.exceptions import ConnectionConfigException as ConnectionConfigException, ConnectionNotExistException as ConnectionNotExistException, ExceptionsMessage as ExceptionsMessage
+from pymilvus.exceptions import ConnectionConfigException as ConnectionConfigException
+from pymilvus.exceptions import ConnectionNotExistException as ConnectionNotExistException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
 from pymilvus.settings import Config as Config
-from typing import Callable
 
 logger: Incomplete
 VIRTUAL_PORT: int
@@ -34,7 +39,16 @@ class Connections(metaclass=SingleInstanceMetaClass):
     async def async_disconnect(self, alias: str): ...
     async def async_remove_connection(self, alias: str): ...
     def remove_connection(self, alias: str): ...
-    def connect(self, alias: str = ..., user: str = '', password: str = '', db_name: str = 'default', token: str = '', _async: bool = False, **kwargs) -> None: ...
+    def connect(
+        self,
+        alias: str = ...,
+        user: str = "",
+        password: str = "",
+        db_name: str = "default",
+        token: str = "",
+        _async: bool = False,
+        **kwargs,
+    ) -> None: ...
     def list_connections(self) -> list: ...
     def get_connection_addr(self, alias: str): ...
     def has_connection(self, alias: str) -> bool: ...

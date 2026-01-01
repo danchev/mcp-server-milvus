@@ -1,11 +1,18 @@
-from . import utils as utils
-from _typeshed import Incomplete
 from enum import IntEnum
-from pymilvus.exceptions import AutoIDException as AutoIDException, ExceptionsMessage as ExceptionsMessage, InvalidConsistencyLevel as InvalidConsistencyLevel
-from pymilvus.grpc_gen import common_pb2 as common_pb2, milvus_pb2 as milvus_types, rg_pb2 as rg_pb2, schema_pb2 as schema_pb2
 from typing import Any, ClassVar, TypeVar
 
-Status = TypeVar('Status')
+from _typeshed import Incomplete
+from pymilvus.exceptions import AutoIDException as AutoIDException
+from pymilvus.exceptions import ExceptionsMessage as ExceptionsMessage
+from pymilvus.exceptions import InvalidConsistencyLevel as InvalidConsistencyLevel
+from pymilvus.grpc_gen import common_pb2 as common_pb2
+from pymilvus.grpc_gen import milvus_pb2 as milvus_types
+from pymilvus.grpc_gen import rg_pb2 as rg_pb2
+from pymilvus.grpc_gen import schema_pb2 as schema_pb2
+
+from . import utils as utils
+
+Status = TypeVar("Status")
 ConsistencyLevel: Incomplete
 logger: Incomplete
 
@@ -42,7 +49,7 @@ class Status:
     EMPTY_COLLECTION: int
     code: Incomplete
     message: Incomplete
-    def __init__(self, code: int = ..., message: str = 'Success') -> None: ...
+    def __init__(self, code: int = ..., message: str = "Success") -> None: ...
     def __eq__(self, other: int | Status): ...
     def OK(self): ...
 
@@ -142,7 +149,9 @@ class CompactionState:
     in_executing: Incomplete
     in_timeout: Incomplete
     completed: Incomplete
-    def __init__(self, compaction_id: int, state: State, in_executing: int, in_timeout: int, completed: int) -> None: ...
+    def __init__(
+        self, compaction_id: int, state: State, in_executing: int, in_timeout: int, completed: int
+    ) -> None: ...
     @property
     def state_name(self): ...
 
@@ -170,7 +179,9 @@ class Shard:
     def shard_leader(self) -> int: ...
 
 class Group:
-    def __init__(self, group_id: int, shards: list[str], group_nodes: list[tuple], resource_group: str, num_outbound_node: dict) -> None: ...
+    def __init__(
+        self, group_id: int, shards: list[str], group_nodes: list[tuple], resource_group: str, num_outbound_node: dict
+    ) -> None: ...
     @property
     def id(self): ...
     @property
@@ -188,7 +199,9 @@ class Replica:
     def groups(self): ...
 
 class ReplicaInfo:
-    def __init__(self, replica_id: int, shards: list[str], nodes: list[tuple], resource_group: str, num_outbound_node: dict) -> None: ...
+    def __init__(
+        self, replica_id: int, shards: list[str], nodes: list[tuple], resource_group: str, num_outbound_node: dict
+    ) -> None: ...
     @property
     def id(self): ...
     @property
@@ -215,7 +228,9 @@ class BulkInsertState:
     IMPORT_PROGRESS: str
     state_2_state: ClassVar[dict]
     state_2_name: ClassVar[dict]
-    def __init__(self, task_id: int, state: State, row_count: int, id_ranges: list, infos: dict, create_ts: int) -> None: ...
+    def __init__(
+        self, task_id: int, state: State, row_count: int, id_ranges: list, infos: dict, create_ts: int
+    ) -> None: ...
     @property
     def task_id(self): ...
     @property
@@ -336,7 +351,15 @@ ResourceGroupTransfer: Incomplete
 
 class HybridExtraList(list):
     extra: Incomplete
-    def __init__(self, lazy_field_data: list[Any], *args, extra: dict | None = None, dynamic_fields: list | None = None, strict_float32: bool = False, **kwargs) -> None: ...
+    def __init__(
+        self,
+        lazy_field_data: list[Any],
+        *args,
+        extra: dict | None = None,
+        dynamic_fields: list | None = None,
+        strict_float32: bool = False,
+        **kwargs,
+    ) -> None: ...
     def __getitem__(self, index: int | slice): ...
     def __iter__(self): ...
     def materialize(self): ...
@@ -358,7 +381,9 @@ class DatabaseInfo:
 
 class AnalyzeToken:
     dict: Incomplete
-    def __init__(self, token: milvus_types.AnalyzerToken, with_hash: bool = False, with_detail: bool = False) -> None: ...
+    def __init__(
+        self, token: milvus_types.AnalyzerToken, with_hash: bool = False, with_detail: bool = False
+    ) -> None: ...
     @property
     def token(self): ...
     @property
@@ -375,4 +400,6 @@ class AnalyzeToken:
 
 class AnalyzeResult:
     tokens: Incomplete
-    def __init__(self, info: milvus_types.AnalyzerResult, with_hash: bool = False, with_detail: bool = False) -> None: ...
+    def __init__(
+        self, info: milvus_types.AnalyzerResult, with_hash: bool = False, with_detail: bool = False
+    ) -> None: ...

@@ -1,11 +1,13 @@
 import abc
+from typing import Any, Callable
+
+from pymilvus.exceptions import MilvusException as MilvusException
+from pymilvus.grpc_gen import milvus_pb2 as milvus_pb2
+
 from .abstract import MutationResult as MutationResult
 from .search_result import SearchResult as SearchResult
 from .types import Status as Status
 from .utils import check_status as check_status
-from pymilvus.exceptions import MilvusException as MilvusException
-from pymilvus.grpc_gen import milvus_pb2 as milvus_pb2
-from typing import Any, Callable
 
 class AbstractFuture(metaclass=abc.ABCMeta):
     @abc.abstractmethod
@@ -16,7 +18,9 @@ class AbstractFuture(metaclass=abc.ABCMeta):
     def done(self): ...
 
 class Future(AbstractFuture, metaclass=abc.ABCMeta):
-    def __init__(self, future: Any, done_callback: Callable | None = None, pre_exception: Callable | None = None, **kwargs) -> None: ...
+    def __init__(
+        self, future: Any, done_callback: Callable | None = None, pre_exception: Callable | None = None, **kwargs
+    ) -> None: ...
     def add_callback(self, func: Callable): ...
     def __del__(self) -> None: ...
     @abc.abstractmethod
@@ -37,7 +41,9 @@ class CreateIndexFuture(Future):
     def on_response(self, response: Any): ...
 
 class CreateFlatIndexFuture(AbstractFuture):
-    def __init__(self, res: Any, done_callback: Callable | None = None, pre_exception: Callable | None = None) -> None: ...
+    def __init__(
+        self, res: Any, done_callback: Callable | None = None, pre_exception: Callable | None = None
+    ) -> None: ...
     def add_callback(self, func: Callable): ...
     def __del__(self) -> None: ...
     def on_response(self, response: Any): ...
