@@ -78,6 +78,15 @@ version_files = [
 ]
 update_changelog_on_bump = true
 
+[tool.coverage.run]
+command_line = "-m mcp_server_milvus"
+branch = true
+source = ["mcp_server_milvus"]
+omit = [
+    "tests/*",
+    "src/mcp_server_milvus/__init__.py",
+]
+
 [tool.coverage.report]
 exclude_lines = [
     "pragma: no cover",
